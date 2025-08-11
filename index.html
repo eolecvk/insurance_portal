@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Insurance Quote Request Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-4 bg-gray-100 flex items-center justify-center min-h-screen font-sans">
+  <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl w-full max-w-4xl">
+    <!-- Header -->
+    <h1 class="text-3xl font-bold text-gray-900 mb-2 text-center">Insurance Quote Request</h1>
+    <p class="text-gray-600 mb-8 text-center">Let's find the perfect plan for you. This will only take a few minutes.</p>
+
+    <!-- Progress Bar -->
+    <div class="mb-10">
+      <div class="h-2 bg-gray-200 rounded-full">
+        <div id="progressBar" class="h-2 bg-indigo-500 rounded-full transition-all duration-300 ease-in-out" style="width:25%"></div>
+      </div>
+      <div class="flex justify-between text-xs mt-2 text-gray-500 font-medium px-1">
+        <span>Family Info</span>
+        <span>Lifestyle</span>
+        <span>Coverage</span>
+        <span>Final Details</span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="insuranceForm" class="space-y-8">
+      <!-- STEP 1 -->
+      <div id="step-1" class="space-y-6">
+        <h2 class="text-3xl font-semibold text-gray-800 border-b pb-3 mb-6">1. About You & Your Family</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label for="fullName" class="block text-base font-bold text-gray-700 mb-1">Your Full Name</label>
+            <input type="text" id="fullName" name="fullName" class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3.5 bg-gray-50" required>
+          </div>
+          <div>
+            <label for="nationality" class="block text-base font-bold text-gray-700 mb-1">Your Nationality</label>
+            <input type="text" id="nationality" name="nationality" class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3.5 bg-gray-50" required>
+          </div>
+          <div>
+            <label for="dob" class="block text-base font-bold text-gray-700 mb-1">Your Date of Birth</label>
+            <input type="date" id="dob" name="dob" class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3.5 bg-gray-50" required>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label for="email" class="block text-base font-bold text-gray-700 mb-1">Your Email Address</label>
+            <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3.5 bg-gray-50" required>
+          </div>
+          <div>
+            <label for="phone" class="block text-base font-bold text-gray-700 mb-1">Your Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-3.5 bg-gray-50" required>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-base font-bold text-gray-700 mb-1">Who are we insuring?</label>
+          <div class="mt-2 flex flex-col md:flex-row md:space-x-6 space-y-2 md:space-y-0">
+            <label class="inline-flex items-center">
+              <input name="insuringFor" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" value="me" checked>
+              <span class="ml-2">Just Me</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input name="insuringFor" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" value="spouse">
+              <span class="ml-2">Me &amp; My Spouse</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input name="insuringFor" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500" value="family">
+              <span class="ml-2">My Family (Spouse &amp; Children)</span>
+            </label>
+          </div>
+        </div>
+
+        <div id="spouseDetails" class="hidden bg-gray-50 p-4 rounded-lg space-y-4">
+          <h3 class="font-semibold text-lg text-gray-700">Spouse's Details</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label for="spouseName" class="block text-base font-bold text-gray-700 mb-1">Spouse's Full Name</label>
+              <input type="text" id="spouseName" name="spouseName" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            </div>
+            <div>
+              <label for="spouseNationality" class="block text-base font-bold text-gray-700 mb-1">Spouse's Nationality</label>
+              <input type="text" id="spouseNationality" name="spouseNationality" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            </div>
+            <div>
+              <label for="spouseDob" class="block text-base font-bold text-gray-700 mb-1">Spouse's Date of Birth</label>
+              <input type="date" id="spouseDob" name="spouseDob" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            </div>
+          </div>
+        </div>
+
+        <div id="childrenDetails" class="hidden bg-gray-50 p-4 rounded-lg space-y-4">
+          <h3 class="font-semibold text-lg text-gray-700">Children's Details</h3>
+          <div id="childrenContainer" class="space-y-4"></div>
+          <button type="button" id="addChildBtn" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+            Add Child
+          </button>
+        </div>
+
+        <div>
+          <label class="block text-base font-bold text-gray-700 mb-1">Are you planning to have children in the next 1-2 years?</label>
+          <p class="text-sm text-gray-500 mt-1">Maternity coverage typically has a waiting period, so it's important to plan ahead.</p>
+          <div class="mt-2 flex items-center space-x-6">
+            <label class="inline-flex items-center"><input name="maternity" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="yes"><span class="ml-2">Yes</span></label>
+            <label class="inline-flex items-center"><input name="maternity" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="no" checked><span class="ml-2">No</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="step-2" class="space-y-6 hidden">
+        <h2 class="text-3xl font-semibold text-gray-800 border-b pb-3 mb-6">2. Your Lifestyle & Health</h2>
+
+        <div>
+          <label for="residence" class="block text-base font-bold text-gray-700 mb-1">Where do you live most of the year?</label>
+          <input type="text" id="residence" name="residence" placeholder="e.g., Ho Chi Minh City, Vietnam" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+        </div>
+
+        <div>
+          <label for="future_location" class="block text-base font-bold text-gray-700 mb-1">In the next 3-5 years, where do you see yourself?</label>
+          <select id="future_location" name="future_location" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            <option>Staying in Vietnam/Asia</option>
+            <option>Moving to another country as an expatriate</option>
+            <option>Returning to my home country</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="travel_frequency" class="block text-base font-bold text-gray-700 mb-1">How often do you travel outside your country of residence per year?</label>
+          <select id="travel_frequency" name="travel_frequency" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            <option value="rarely">Rarely (0-1 trips)</option>
+            <option value="occasionally">Occasionally (2-3 trips)</option>
+            <option value="frequently">Frequently (4+ trips)</option>
+          </select>
+        </div>
+
+        <div class="pt-4 border-t">
+          <label class="block text-base font-bold text-gray-700 mb-1">Do you or any family members to be insured have a pre-existing or chronic illness?</label>
+          <div class="mt-2 flex items-center space-x-6">
+            <label class="inline-flex items-center"><input name="pre_existing" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="yes"><span class="ml-2">Yes</span></label>
+            <label class="inline-flex items-center"><input name="pre_existing" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="no" checked><span class="ml-2">No</span></label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-base font-bold text-gray-700 mb-1">Do you or any family members to be insured smoke?</label>
+          <div class="mt-2 flex items-center space-x-6">
+            <label class="inline-flex items-center"><input name="smoke" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="yes"><span class="ml-2">Yes</span></label>
+            <label class="inline-flex items-center"><input name="smoke" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="no" checked><span class="ml-2">No</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="step-3" class="space-y-6 hidden">
+        <h2 class="text-3xl font-semibold text-gray-800 border-b pb-3 mb-6">3. Your Coverage Needs</h2>
+
+        <div>
+          <label class="block text-base font-bold text-gray-700 mb-1">Are you currently covered by an insurance plan?</label>
+          <div class="mt-2 flex items-center space-x-6">
+            <label class="inline-flex items-center"><input id="cover_yes" name="current_cover" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="yes"><span class="ml-2">Yes</span></label>
+            <label class="inline-flex items-center"><input id="cover_no" name="current_cover" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="no" checked><span class="ml-2">No</span></label>
+          </div>
+        </div>
+
+        <div id="currentCoverageDetails" class="space-y-4 bg-gray-50 p-4 rounded-lg hidden">
+          <div>
+            <label for="cover_expire" class="block text-base font-bold text-gray-700 mb-1">When does your current cover expire?</label>
+            <input type="date" id="cover_expire" name="cover_expire" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-white">
+          </div>
+
+          <div>
+            <label for="cover_good_bad" class="block text-base font-bold text-gray-700 mb-1">What do you like or dislike about your current plan?</label>
+            <p class="text-sm text-gray-500 mt-1">Please share any positives or negatives so we can better match your needs.</p>
+            <textarea id="cover_good_bad" name="cover_good_bad" rows="3" class="mt-2 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-white" placeholder="Your feedback..."></textarea>
+          </div>
+        </div>
+
+        <div>
+          <label for="preferred_hospitals" class="block text-base font-bold text-gray-700 mb-1">Which hospitals or clinics do you prefer to use?</label>
+          <p class="text-sm text-gray-500 mt-1">This helps us recommend plans with the best network for you (e.g., Family Medical Practice, FV Hospital).</p>
+          <input type="text" id="preferred_hospitals" name="preferred_hospitals" class="mt-2 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+        </div>
+
+        <div>
+          <label for="repatriation" class="block text-base font-bold text-gray-700 mb-1">For a serious illness, where would you prefer to be treated?</label>
+          <select id="repatriation" name="repatriation" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            <option>At the nearest center of medical excellence</option>
+            <option>Repatriated to my home country</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="travel_usa_canada" class="block text-base font-bold text-gray-700 mb-1">Do you need coverage that includes travel to the USA/Canada?</label>
+          <p class="text-sm text-gray-500 mt-1">Coverage including the USA is significantly more expensive due to high healthcare costs.</p>
+          <select id="travel_usa_canada" name="travel_usa_canada" class="mt-2 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            <option value="no">No, exclude USA/Canada</option>
+            <option value="yes">Yes, include USA/Canada</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-base font-bold text-gray-700 mb-1">Would you consider a deductible to lower your premium?</label>
+          <p class="text-sm text-gray-500 mt-1">A deductible is a fixed amount you pay out-of-pocket for a claim before the insurer pays. A higher deductible usually means a lower annual cost.</p>
+          <div class="mt-2 flex items-center space-x-6">
+            <label class="inline-flex items-center"><input name="deductible" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="yes"><span class="ml-2">Yes</span></label>
+            <label class="inline-flex items-center"><input name="deductible" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="no" checked><span class="ml-2">No</span></label>
+            <label class="inline-flex items-center"><input name="deductible" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="unsure"><span class="ml-2">I'm not sure, please advise</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div id="step-4" class="space-y-6 hidden">
+        <h2 class="text-3xl font-semibold text-gray-800 border-b pb-3 mb-6">4. Final Details</h2>
+
+        <div>
+          <label for="budget" class="block text-base font-bold text-gray-700 mb-1">What is your approximate annual budget for this insurance?</label>
+          <p class="text-sm text-gray-500 mt-1">This helps us find plans that fit your financial needs.</p>
+          <input type="text" id="budget" name="budget" placeholder="e.g., $1,000 - $2,000 per year" class="mt-2 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+        </div>
+
+        <div>
+          <label for="start_date" class="block text-base font-bold text-gray-700 mb-1">How soon do you need coverage to start?</label>
+          <select id="start_date" name="start_date" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            <option value="asap">As soon as possible</option>
+            <option value="next_month">Within the next month</option>
+            <option value="few_months">In the next 2-3 months</option>
+            <option value="browse">I'm just browsing for now</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="paid_by" class="block text-base font-bold text-gray-700 mb-1">Who will be paying for the insurance?</label>
+          <select id="paid_by" name="paid_by" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            <option value="myself">Myself / My Family</option>
+            <option value="company">My Company</option>
+          </select>
+        </div>
+
+        <div id="redInvoiceSection" class="hidden">
+          <label class="block text-base font-bold text-gray-700 mb-1">Will a red invoice (VAT invoice) be required for accounting?</label>
+          <div class="mt-2 flex items-center space-x-6">
+            <label class="inline-flex items-center"><input name="red_invoice" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="yes"><span class="ml-2">Yes</span></label>
+            <label class="inline-flex items-center"><input name="red_invoice" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="no" checked><span class="ml-2">No</span></label>
+          </div>
+        </div>
+
+        <div>
+          <label for="payment_frequency" class="block text-base font-bold text-gray-700 mb-1">How would you prefer to pay?</label>
+          <p class="text-sm text-gray-500 mt-1">Annual payment is the most cost-effective. Installments may include a small surcharge.</p>
+          <select id="payment_frequency" name="payment_frequency" class="mt-2 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50">
+            <option value="yearly">Yearly</option>
+            <option value="quarterly">Quarterly</option>
+            <option value="monthly">Monthly (Credit Card required)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-base font-bold text-gray-700 mb-1">Do you have colleagues or friends who might also be interested in a quote?</label>
+          <p class="text-sm text-gray-500 mt-1">We can sometimes offer group discounts for multiple applicants.</p>
+          <div class="mt-2 flex items-center space-x-6">
+            <label class="inline-flex items-center"><input name="referral" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="yes"><span class="ml-2">Yes</span></label>
+            <label class="inline-flex items-center"><input name="referral" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300" value="no" checked><span class="ml-2">No</span></label>
+          </div>
+        </div>
+
+        <div>
+          <label for="comments" class="block text-base font-bold text-gray-700 mb-1">Is there anything else you'd like us to know?</label>
+          <textarea id="comments" name="comments" rows="3" placeholder="Any specific concerns, budget constraints, or questions you have..." class="mt-2 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-gray-50"></textarea>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="mt-10 pt-6 border-t flex justify-between items-center">
+        <button type="button" id="backBtn" class="px-8 py-3 border border-gray-300 rounded-full shadow-sm text-base font-medium text-gray-700 bg-white hover:bg-gray-50 hidden">
+          Back
+        </button>
+
+        <div class="flex items-center space-x-3 ml-auto">
+          <button type="button" id="nextBtn" class="px-8 py-3 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+            Next Step
+          </button>
+          <button type="submit" id="submitBtn" class="px-8 py-3 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700 hidden">
+            Get My Quote
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentStep = 1;
+      const totalSteps = 4;
+      const steps = Array.from({ length: totalSteps }, (_, i) => document.getElementById(`step-${i + 1}`));
+      const progressBar = document.getElementById('progressBar');
+      const nextBtn = document.getElementById('nextBtn');
+      const backBtn = document.getElementById('backBtn');
+      const submitBtn = document.getElementById('submitBtn');
+
+      // Conditional fields
+      const insuringForRadios = document.querySelectorAll('input[name="insuringFor"]');
+      const spouseDetails = document.getElementById('spouseDetails');
+      const childrenDetails = document.getElementById('childrenDetails');
+      const addChildBtn = document.getElementById('addChildBtn');
+      const childrenContainer = document.getElementById('childrenContainer');
+
+      const coverYes = document.getElementById('cover_yes');
+      const coverNo = document.getElementById('cover_no');
+      const currentCoverageDetails = document.getElementById('currentCoverageDetails');
+
+      const paidBy = document.getElementById('paid_by');
+      const redInvoiceSection = document.getElementById('redInvoiceSection');
+
+      // Update UI for current step
+      function updateStepDisplay() {
+        steps.forEach((step, index) => {
+          step.classList.toggle('hidden', index !== currentStep - 1);
+        });
+
+        backBtn.classList.toggle('hidden', currentStep === 1);
+        nextBtn.classList.toggle('hidden', currentStep === totalSteps);
+        submitBtn.classList.toggle('hidden', currentStep !== totalSteps);
+
+        // Next button label:
+        nextBtn.textContent = (currentStep === totalSteps - 1) ? 'Final Step' : 'Next Step';
+
+        progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      nextBtn.addEventListener('click', () => {
+        if (currentStep < totalSteps) {
+          currentStep++;
+          updateStepDisplay();
+        }
+      });
+
+      backBtn.addEventListener('click', () => {
+        if (currentStep > 1) {
+          currentStep--;
+          updateStepDisplay();
+        }
+      });
+
+      // InsuringFor radio behavior: show spouse or children blocks
+      insuringForRadios.forEach(radio => {
+        radio.addEventListener('change', (e) => {
+          const val = e.target.value;
+          spouseDetails.classList.toggle('hidden', val !== 'spouse');
+          childrenDetails.classList.toggle('hidden', val !== 'family');
+        });
+      });
+
+      // Children adding/removing
+      let childCount = 0;
+      addChildBtn.addEventListener('click', () => {
+        childCount++;
+        const html = `
+          <div class="child-entry grid grid-cols-1 md:grid-cols-3 gap-4 border-t pt-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Child ${childCount}'s Full Name</label>
+              <input type="text" name="childName${childCount}" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-white">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Child ${childCount}'s Date of Birth</label>
+              <input type="date" name="childDob${childCount}" class="mt-1 block w-full rounded-md border-2 border-gray-300 p-3.5 bg-white">
+            </div>
+            <div class="flex items-end">
+              <button type="button" class="removeChildBtn text-sm text-red-600 hover:text-red-800">Remove</button>
+            </div>
+          </div>
+        `;
+        childrenContainer.insertAdjacentHTML('beforeend', html);
+      });
+
+      // Delegated removal
+      childrenContainer.addEventListener('click', (e) => {
+        if (e.target.classList.contains('removeChildBtn')) {
+          e.target.closest('.child-entry').remove();
+        }
+      });
+
+      // Current coverage details toggle
+      if (coverYes && coverNo && currentCoverageDetails) {
+        coverYes.addEventListener('change', () => currentCoverageDetails.classList.remove('hidden'));
+        coverNo.addEventListener('change', () => currentCoverageDetails.classList.add('hidden'));
+      }
+
+      // Paid by -> red invoice toggle
+      if (paidBy && redInvoiceSection) {
+        paidBy.addEventListener('change', (e) => {
+          redInvoiceSection.classList.toggle('hidden', e.target.value !== 'company');
+        });
+      }
+
+      // Submit handler (stub)
+      document.getElementById('insuranceForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        // Collect form data (example)
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        console.log('Form submitted', data);
+        alert('Thank you! Your quote request has been submitted. We will contact you shortly.');
+      });
+
+      // Initialize display
+      updateStepDisplay();
+    });
+  </script>
+</body>
+</html>
